@@ -1,0 +1,174 @@
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    color:cornflowerblue;
+}
+
+footer {
+    margin:  3em auto;
+    border-top: 1px #000 solid;
+    width: 80%;
+}
+
+#dropSearch{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#dropDown, #dropSearch {
+    position: absolute;
+    left: 5%;
+    width: 200px;
+}
+#dropDown > p, #dropDown > link{
+    padding: 1%;
+    background-color: #181818;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+#dropDown {
+    margin-top: 4%;
+    max-height: 300px;
+    min-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px cornflowerblue solid;
+}
+
+.hide {
+    display: none;
+}
+
+.container {
+    padding: 3%;
+    text-align: center;
+    background-color: #1f1e1e;
+    border: 2px #C0C0C0 solid;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container:hover {
+    position: relative;
+    z-index: 10;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 3px solid cornflowerblue;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+
+}
+
+
+main {
+    height: 600px;
+}
+
+.text-div {
+    border: 1px solid white;
+    padding: 2%;
+    text-align: center;
+    margin: 2%;
+}
+
+#title {
+    text-align: center;
+    border-bottom: 2px #181818 solid;
+}
+
+.text {
+    width : 80%;
+    margin: 0 auto;
+    margin-top: 2%;
+    padding: 2%;
+    border: 1px solid #e6e3e3;
+    background-color: #181818;
+    color: #C0C0C0;
+    overflow-wrap: break-word;  /* Same as above, modern syntax */
+    white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
+    max-width: 100%; /* Ensure it doesn't overflow the container */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 3fr));
+    gap: 10px;
+    vertical-align: middle;
+}
+
+.text > div > img{
+    max-height: 200px;
+}
+
+.text > div > img:hover {
+    cursor: pointer;
+    image-rendering: -webkit-crisp-edges;
+}
+
+@media screen and (max-width: 1200px) {
+    .text {
+        width : 80%;
+        margin : 0 auto;
+        margin-top: 2%;
+        padding: 2%;
+        border: 1px solid #e6e3e3;
+        background-color: #181818;
+        color: #C0C0C0;
+        overflow-wrap: break-word;  /* Same as above, modern syntax */
+        white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
+        max-width: 100%; /* Ensure it doesn't overflow the container */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(35%, 2fr));
+        gap: 10px;
+        vertical-align: middle;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .text {
+        width : 80%;
+        margin : 0 auto;
+        margin-top: 2%;
+        padding: 2%;
+        border: 1px solid #e6e3e3;
+        background-color: #181818;
+        color: #C0C0C0;
+        overflow-wrap: break-word;  /* Same as above, modern syntax */
+        white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
+        max-width: 100%; /* Ensure it doesn't overflow the container */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+        gap: 10px;
+        vertical-align: middle;
+    }
+}
+
+.drop-item {
+    border: 1px #fff solid;
+}
+
+button, #btn1 {
+    color: cornflowerblue;
+    margin-top: 1%;
+    padding : 1%;
+    width: 200px;
+    background-color: #181818;
+    border: 1px cornflowerblue solid;
+}
+
+#bigImg {
+    padding: 3%;
+    text-align: center;
+    background-color: #1f1e1e;
+    border: 2px #C0C0C0 solid;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.big-img {
+    width: 100%;
+}
