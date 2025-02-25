@@ -1,13 +1,9 @@
 body {
-    font-family:Arial, Helvetica, sans-serif;
-    background-color: black;
+    font-family: "Century Gothic", Arial, sans-serif;    background-color: black;
     text-align: center;
     color: white;
 }
 
-h1 {
-    color:cornflowerblue;
-}
 
 footer {
     margin:  3em auto;
@@ -15,30 +11,55 @@ footer {
     width: 80%;
 }
 
-#dropSearch{
+#dropSearch {
+    width: 100%;
+    padding: 3%;
+    color: white;
+    border: 1px solid cornflowerblue;
+    background-color: #181818;
+    border-radius: 2%;
+    outline: none;
+    box-shadow: none;
     margin-top: 2%;
     margin-bottom: 2%;
+    box-sizing: border-box;
 }
 
-#dropDown, #dropSearch {
-    position: absolute;
-    left: 5%;
-    width: 200px;
-}
-#dropDown > p, #dropDown > link{
-    padding: 1%;
-    background-color: #181818;
+#dropBox > div, #dropBox > input {
+    /*background-color: #181818;*/
     width: 100%;
     text-align: center;
     margin: 0;
 }
+
+#dropBox {
+    position: absolute;
+    left: 5%;
+    width: 22%;
+    display: block grid;
+    box-sizing: border-box;
+}
+#dropDown > p, #dropDown > link{
+    padding: 10px;
+    background-color: #181818;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+    word-wrap: break-word; /* Breaks long words to fit inside */
+    white-space: normal;   /* Allows text to wrap to the next line */
+    box-sizing: border-box; /* Includes padding in the element's width */
+    display: block;
+}
 #dropDown {
-    margin-top: 4%;
-    max-height: 300px;
-    min-height: 300px;
+    border-top: 1px cornflowerblue solid;
+    border-bottom: 1px cornflowerblue solid;
+    width: 100%;
+    max-height: 330px;
+    min-height: 330px;
     overflow-y: scroll;
     overflow-x: hidden;
-    border: 1px cornflowerblue solid;
+    box-sizing: border-box;
 }
 
 .hide {
@@ -147,14 +168,17 @@ main {
 }
 
 .drop-item {
-    border: 1px #fff solid;
+    border-left: 1px cornflowerblue solid;
+    border-right: 1px cornflowerblue solid;
+    border-bottom: 1px cornflowerblue solid;
+    width: 100%;
 }
 
 button, #btn1 {
     color: cornflowerblue;
     margin-top: 1%;
     padding : 1%;
-    width: 200px;
+    width: 20%;
     background-color: #181818;
     border: 1px cornflowerblue solid;
 }
