@@ -22,11 +22,13 @@ window.addEventListener('load', async function () {
         const text = await response.text();
         const obj = JSON.parse(text);
 
+
+
         const dropdown = document.querySelector('#dropDown');
         const addedTitles = new Set(); // Track titles we've added
 
         for (const item of obj.collection.items) {
-            const name = item.data[0].keywords;
+            const name = item.data[0].title;
 
             if (!addedTitles.has(name)) {
                 const dropItem = document.createElement('p');
@@ -37,6 +39,7 @@ window.addEventListener('load', async function () {
                 console.log(name + ": Was added to the drop down");
 
                 addedTitles.add(name); // Mark this title as added
+
             }
         }
     } catch (e) {
@@ -45,7 +48,9 @@ window.addEventListener('load', async function () {
 
     // Handle search button click
     document.querySelector('#btn1').addEventListener('click', async function (ev) {
+        main_container.innerHTML = '';
         const query = dropSearch.value.trim();
+        document.querySelector("#load_bar").classList.remove ("hide");
 
         // const searchterm = "Apollo 11";
         const url = 'https://images-api.nasa.gov/search?q=' + encodeURIComponent(query);
@@ -80,6 +85,8 @@ window.addEventListener('load', async function () {
                 div.appendChild(description);
                 newDiv.appendChild(div);
                 main.appendChild(newDiv);
+                document.querySelector("#load_bar").classList.add ("hide");
+
             }
 
             console.log(text);

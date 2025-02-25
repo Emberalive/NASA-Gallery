@@ -196,3 +196,32 @@ button, #btn1 {
 .big-img {
     width: 100%;
 }
+
+#load_bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: transparent;
+    z-index: 9999;
+}
+
+.load_progress {
+    width: 0;
+    height: 100%;
+    background-color: cornflowerblue;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 50%;
+    }
+    100% {
+        width: 100%;
+    }
+}
