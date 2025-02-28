@@ -127,14 +127,31 @@ window.addEventListener('load', async function () {
                     if (media_type === 'image') {
                         const newImg = document.createElement("img");
                         newImg.src = link;
-
+                        
                         newDiv.appendChild(newImg);
                     } else if (media_type === 'video') {
-                        const newVideo = document.createElement("video");
-                        newVideo.src = link;
+                        // Make an additional fetch request to get the video URL
+                        const assetUrl = item.href;
+                        const videoResponse = await fetch(assetUrl);
+                        const videoText = await videoResponse.text();
+                        const videoObj = JSON.parse(videoText);
 
+                        // Assuming the video URL is in the first item of the array
+                        const videoUrl = videoObj[0];
+                        console.log(videoUrl); // Check the URL in the console
+
+                        const newVideo = document.createElement("video");
+                        newVideo.src = videoUrl;
+                        newVideo.controls = true; // Add video controls (play, pause, volume)
+
+                        newVideo.onerror = () => {
+                            newVideo.style.display = 'none'; // Hide the video if it fails to load
+                        };
+                        
                         newDiv.appendChild(newVideo);
+
                     }
+                    
 
 
                     div.appendChild(description);
@@ -150,23 +167,36 @@ window.addEventListener('load', async function () {
             console.error(e);
         }
         });
+    
 
     const main_container = document.querySelector('#text');
     main_container.addEventListener('click',  function(event) {
         const clickedContainer = event.target.closest('.container');
-        
+
         if (clickedContainer) {
+            const title = clickedContainer.querySelector('h2').textContent;
             const keywordsDiv = clickedContainer.querySelector('#keyword');
-            const img = clickedContainer.querySelector('img').getAttribute('src');
+            const imageElement = clickedContainer.querySelector('img');
+            const videoElement = clickedContainer.querySelector('video');
             const description = clickedContainer.querySelector('p').innerText;
             const searchButton = document.querySelector('#btn1');
-            
+
             searchButton.classList.add('hide');
             dropSearch.classList.add('hide');
             main_container.classList.remove('text');
-            main_container.innerHTML = `
+
+            // Check for image or video and set variables accordingly
+            let img = imageElement ? imageElement.getAttribute('src') : null;
+            let video = videoElement ? videoElement.getAttribute('src') : null;
+
+            searchButton.classList.add('hide');
+            dropSearch.classList.add('hide');
+            main_container.classList.remove('text');
+            if (img){
+                main_container.innerHTML = `
                 <div class="wrapper">
                     <div id="bigImg">
+                             <h2>${title}</h2>
                             <img class="big-img" src="${img}" alt="${description}">
                             <div>
                                 <p class="text-div">${description}</p>
@@ -178,9 +208,27 @@ window.addEventListener('load', async function () {
                     <button id="backButton">Go Back</button>
                 </div>
                 `;
+            } else {
+                main_container.innerHTML = `
+                <div class="wrapper">
+                    <div id="bigImg">
+                         <h2 class="text-title">${title}</h2>
+                        <video class="big-img" src="${video}" controls autoplay></video>
+                        
+                        <div>
+                            <p class="text-div">${description}</p>
+                        <div>
+                            Keywords: ${keywordsDiv ? Array.from(keywordsDiv.children).map(child => child.outerHTML).join(', ') : 'No keywords available'}                                
+                        </div>
+                        </div>
+                    </div>
+                    <button id="backButton">Go Back</button>
+                </div>
+                `;
+            }
             document.querySelector(".wrapper").style.padding = '30px';
             document.querySelector("#back2top").classList.add('hide');
-            
+
 
         }
 

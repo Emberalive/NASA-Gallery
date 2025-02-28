@@ -95,6 +95,9 @@ main {
 #text > div > img{
     max-height: 200px;
 }
+#text > div > video{
+    max-height: 200px;
+}
 
 #text > div > img:hover {
     cursor: pointer;
@@ -133,7 +136,7 @@ main {
     }
 }
 
-#back2top {
+#back2top, #backButton {
     color: cornflowerblue;
     margin-top: 1%;
     padding : 1%;
@@ -169,6 +172,8 @@ main {
 
 .big-img {
     width: 100%;
+    border-radius: 15px;
+
 }
 .big-img > div > img{
     max-height: 30%;
@@ -207,4 +212,9 @@ main {
 .keyword {
     color: cornflowerblue;
     font-weight: bold;
+}
+
+.video {
+    width: 100%;
+    margin: 2%;
 }
