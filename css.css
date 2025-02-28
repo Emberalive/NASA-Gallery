@@ -235,3 +235,8 @@ button, #btn1 {
         width: 100%;
     }
 }
+
+.keyword {
+    color: cornflowerblue;
+    font-weight: bold;
+}
