@@ -13,17 +13,55 @@ footer {
 }
 
 #dropSearch {
-    max-height: 100%;
-    width: 30%;
-    color: black;
-    border: 1px solid;
-    border-radius: 10px;
+    width: 100%;
+    padding: 3%;
+    color: white;
+    border: 1px solid cornflowerblue;
+    background-color: #181818;
+    border-radius: 2%;
     outline: none;
     box-shadow: none;
-    box-sizing: border-box; /* Ensures padding is included in total height */
-    flex-shrink: 1; /* Allows it to shrink within flex parent */
+    margin-top: 2%;
+    margin-bottom: 2%;
+    box-sizing: border-box;
 }
 
+#dropBox > div, #dropBox > input {
+    /*background-color: #181818;*/
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+#dropBox {
+    position: absolute;
+    left: 5%;
+    width: 22%;
+    display: block grid;
+    box-sizing: border-box;
+}
+#dropDown > p, #dropDown > link{
+    padding: 10px;
+    background-color: #181818;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+    word-wrap: break-word; /* Breaks long words to fit inside */
+    white-space: normal;   /* Allows text to wrap to the next line */
+    box-sizing: border-box; /* Includes padding in the element's width */
+    display: block;
+}
+#dropDown {
+    border-top: 1px cornflowerblue solid;
+    border-bottom: 1px cornflowerblue solid;
+    width: 100%;
+    max-height: 330px;
+    min-height: 330px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
 
 .hide {
     display: none;
@@ -49,11 +87,6 @@ footer {
 
 }
 
-#searchBar {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    height: 50px;
-}
 
 main {
     height: 600px;
@@ -61,9 +94,9 @@ main {
 
 .text-div {
     border-top: 2px solid #9e9b9b;
-    padding-top: 2%;
+    padding: 2%;
     text-align: center;
-    margin-bottom: 3%;
+    margin: 3%;
     max-height: 330px;
 }
 
@@ -88,7 +121,7 @@ main {
     max-width: 100%; /* Ensure it doesn't overflow the container */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25%, 3fr));
-    gap: 20px;
+    gap: 10px;
     vertical-align: middle;
 }
 
@@ -112,7 +145,7 @@ main {
         max-width: 100%; /* Ensure it doesn't overflow the container */
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(35%, 2fr));
-        gap: 15px;
+        gap: 10px;
         vertical-align: middle;
     }
 }
@@ -133,7 +166,14 @@ main {
     }
 }
 
-#back2top {
+.drop-item {
+    border-left: 1px cornflowerblue solid;
+    border-right: 1px cornflowerblue solid;
+    border-bottom: 1px cornflowerblue solid;
+    width: 100%;
+}
+
+button, #btn1 {
     color: cornflowerblue;
     margin-top: 1%;
     padding : 1%;
@@ -142,24 +182,9 @@ main {
     border: 1px cornflowerblue solid;
 }
 
-#btn1 {
-    height: 100%;
-    width: 100px;
-    background-color: cornflowerblue;
-    border-radius: 10px;
-    outline: none;
-    color: aliceblue;
-}
-
-#btn1:hover {
-    background-color: #4063a3;
-    color: white;
-}
-
 #bigImg {
+    padding: 3%;
     text-align: center;
-    padding-left: 3%;
-    padding-right: 3%;
     background-color: #1f1e1e;
     border: 2px #C0C0C0 solid;
     border-radius: 10px;
@@ -169,10 +194,6 @@ main {
 
 .big-img {
     width: 100%;
-}
-.big-img > div > img{
-    max-height: 30%;
-    min-height: 30%;
 }
 
 #load_bar {

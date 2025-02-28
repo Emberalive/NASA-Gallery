@@ -167,6 +167,7 @@ window.addEventListener('load', async function () {
             main_container.innerHTML = `
                 <div class="wrapper">
                     <div id="bigImg">
+                        <div style="padding: 20px;">
                             <img class="big-img" src="${img}" alt="${description}">
                             <div>
                                 <p class="text-div">${description}</p>
@@ -174,6 +175,7 @@ window.addEventListener('load', async function () {
                                     Keywords: ${keywordsDiv ? Array.from(keywordsDiv.children).map(child => child.outerHTML).join(', ') : 'No keywords available'}                                
                                 </div>
                             </div>
+                       </div>
                     </div>
                     <button id="backButton">Go Back</button>
                 </div>
