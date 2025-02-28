@@ -1,6 +1,5 @@
 window.addEventListener('load', async function () {
     const dropSearch = document.querySelector('#dropSearch');
-    const dropDown = document.querySelector('#dropDown');
     const searchButton = document.querySelector('#btn1');
     
     function radom_search(search, button) {
@@ -11,52 +10,6 @@ window.addEventListener('load', async function () {
     }
 
     radom_search(dropSearch, searchButton);
-
-
-    dropSearch.addEventListener('focusin', (event) => {
-        if (document.activeElement === dropSearch) {
-            console.log('Input is focused');
-            dropDown.classList.remove('hide');
-        }
-    });
-
-    dropSearch.addEventListener('focusout', (event) => {
-        if (document.activeElement !== dropDown && !dropDown.contains(document.activeElement)) {
-            console.log('Input is not focused');
-            dropDown.classList.add('hide');
-        }
-    });
-
-
-    // try {
-    //     const url = 'https://images-api.nasa.gov/search?q=center';
-    //     const response = await fetch(url);
-    //     const text = await response.text();
-    //     const obj = JSON.parse(text);
-    //
-    //
-    //
-    //     const dropdown = document.querySelector('#dropDown');
-    //     const addedTitles = new Set(); // Track titles we've added
-    //
-    //     for (const item of obj.collection.items) {
-    //         const name = item.data[0].title;
-    //
-    //         if (!addedTitles.has(name)) {
-    //             const dropItem = document.createElement('p');
-    //             dropItem.classList.add('drop-item');
-    //             dropItem.textContent = name;
-    //
-    //             dropdown.appendChild(dropItem);
-    //             console.log(name + ": Was added to the drop down");
-    //
-    //             addedTitles.add(name); // Mark this title as added
-    //
-    //         }
-    //     }
-    // } catch (e) {
-    //     console.error(e);
-    // }
 
     // Handle search button click
     document.querySelector('#btn1').addEventListener('click', async function (ev) {
