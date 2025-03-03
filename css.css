@@ -1,9 +1,16 @@
 body {
-    font-family: "Century Gothic", Arial, sans-serif;    background-color: black;
+    font-family: "Century Gothic", Arial, sans-serif;
     text-align: center;
     color: white;
-    background-image: url(./images/background.jpg);
+    background: black url(./images/background.jpg);
+    margin: 0;
 }
+
+#warn > #warning {
+    color: yellow;
+    font-weight: bold;
+}
+
 
 
 footer {
@@ -27,6 +34,8 @@ footer {
 
 .hide {
     display: none;
+    margin: 0;
+    height: 0;
 }
 
 .container {
@@ -62,8 +71,8 @@ main {
 .text-div {
     border-top: 2px solid #9e9b9b;
     padding-top: 2%;
+    margin: 2%;
     text-align: center;
-    margin-bottom: 3%;
     max-height: 330px;
 }
 
@@ -74,17 +83,24 @@ main {
 }
 
 #title {
+    padding: 1%;
     text-align: center;
-    border-bottom: 2px #181818 solid;
+    border-bottom: 2px #C0C0C0 solid;
+    background-color: #181818;
+    width: 100%;
+    /*making the title div fit the whole of the screen?*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    margin: 0 0 15px;
 }
 
-#text {
+h1 {
+    margin: 0;
+}
+
+#nasa_gallery {
     width : 80%;
-    margin: 0 auto;
-    margin-top: 2%;
-    padding: 2%;
-    overflow-wrap: break-word;  /* Same as above, modern syntax */
-    white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
+    margin: 2% auto 0;
     max-width: 100%; /* Ensure it doesn't overflow the container */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25%, 3fr));
@@ -92,23 +108,22 @@ main {
     vertical-align: middle;
 }
 
-#text > div > img{
+#nasa_gallery > div > img{
     max-height: 200px;
 }
-#text > div > video{
+#nasa_gallery > div > video{
     max-height: 200px;
 }
 
-#text > div > img:hover {
+#nasa_gallery > div > img:hover {
     cursor: pointer;
     image-rendering: -webkit-crisp-edges;
 }
 
 @media screen and (max-width: 1200px) {
-    #text {
+    #nasa_gallery {
         width : 80%;
-        margin : 0 auto;
-        margin-top: 2%;
+        margin: 2% auto 0;
         padding: 2%;
         overflow-wrap: break-word;  /* Same as above, modern syntax */
         white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
@@ -121,10 +136,9 @@ main {
 }
 
 @media screen and (max-width: 800px) {
-    #text {
+    #nasa_gallery {
         width : 80%;
-        margin : 0 auto;
-        margin-top: 2%;
+        margin: 2% auto 0;
         padding: 2%;
         overflow-wrap: break-word;  /* Same as above, modern syntax */
         white-space: pre-wrap;  /* Ensures the text will wrap and doesn't overflow */
@@ -163,6 +177,7 @@ main {
     text-align: center;
     padding-left: 3%;
     padding-right: 3%;
+    padding-bottom: 3%;
     background-color: #1f1e1e;
     border: 2px #C0C0C0 solid;
     border-radius: 10px;

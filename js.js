@@ -12,7 +12,7 @@ window.addEventListener('load', async function () {
     radom_search(dropSearch, searchButton);
 
     // Handle search button click
-    document.querySelector('#btn1').addEventListener('click', async function (ev) {
+    document.querySelector('#btn1').addEventListener('click', async function () {
         // list for media types selected
         let mediaformat = []
         // getting the media type, and checking if it is checked, and if so pushing it to the media format list
@@ -24,18 +24,21 @@ window.addEventListener('load', async function () {
         const query = dropSearch.value.trim();
         // making the css loading bar to be visible
         document.querySelector("#load_bar").classList.remove ("hide");
-        
+        document.querySelector("#back2top").classList.remove('hide');
+
         // setting the url to incorporate the media values as well as the search query
         const url = `https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=${mediaformat.join(',')}`
         try {
             const response = await fetch(url);
             const text = await response.text();
             const obj = JSON.parse(text);
+            document.querySelector("#load_bar").classList.remove("hide");
+
 
             for (const item of obj.collection.items) {
                 const data = item.data[0];
                 const title = data.title;
-                const link = item.links[0].href          
+                const link = item.links[0].href
                 const descr = data.description; 
                 const media_type = data.media_type;
 
@@ -43,7 +46,7 @@ window.addEventListener('load', async function () {
                 console.log(link);
                 console.log(media_type);
                 
-                    const main = document.querySelector("#text");
+                    const main = document.querySelector("#nasa_gallery");
 
                     const title_div = document.createElement("div");
                     title_div.classList.add('title');
@@ -105,24 +108,26 @@ window.addEventListener('load', async function () {
 
                     }
                     
-
-
                     div.appendChild(description);
                     div.appendChild(keywords);
                     newDiv.appendChild(div);
                     main.appendChild(newDiv);
                     document.querySelector("#load_bar").classList.add("hide");
-                
             }
-
             console.log(text);
         } catch (e) {
             console.error(e);
+            const warn_div = document.querySelector('#warn');
+            const text = "There is some trouble connecting to the server"
+            const warning = document.createElement('p');
+            warning.id = "warning";
+            warning.textContent = text;
+            warn_div.appendChild(warning);
         }
         });
     
 
-    const main_container = document.querySelector('#text');
+    const main_container = document.querySelector('#nasa_gallery');
     main_container.addEventListener('click',  function(event) {
         const clickedContainer = event.target.closest('.container');
 
@@ -136,7 +141,8 @@ window.addEventListener('load', async function () {
 
             searchButton.classList.add('hide');
             dropSearch.classList.add('hide');
-            main_container.classList.remove('text');
+            main_container.classList.remove('nasa_gallery');
+            main_container.removeAttribute.id = "nasa_gallery";
 
             // Check for image or video and set variables accordingly
             let img = imageElement ? imageElement.getAttribute('src') : null;
@@ -181,8 +187,6 @@ window.addEventListener('load', async function () {
             }
             document.querySelector(".wrapper").style.padding = '30px';
             document.querySelector("#back2top").classList.add('hide');
-
-
         }
 
         const keywordLinks = document.querySelectorAll('.keyword');
@@ -200,7 +204,7 @@ window.addEventListener('load', async function () {
 
         
         const searchButton = document.querySelector('#btn1');
-        document.querySelector('#backButton').addEventListener('click',  function (e) {
+        document.querySelector('#backButton').addEventListener('click',  function () {
             main_container.innerHTML = '';
             searchButton.classList.remove('hide');
             main_container.classList.add('text');

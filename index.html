@@ -10,24 +10,25 @@
 <body>
     <div id="title">
         <h1>NASA Gallery</h1>
-        <input type="checkbox" name="images" id="images" checked>
-        <label for="images">Images</label>
-        <input type="checkbox" name="video" id="videos">
-        <label for="videos">Videos</label>
-        <div id="load_bar" class="hide">
-            <div class="load_progress"></div>
+        <div>
+            <input type="checkbox" name="images" id="images" checked>
+            <label for="images">Images</label>
+            <input type="checkbox" name="video" id="videos" checked>
+            <label for="videos">Videos</label>
+            <div id="load_bar" class="hide">
+                <div class="load_progress"></div>
+            </div>
         </div>
     </div>
 
-
     <div id="searchBar">
         <label for="dropSearch"></label>
-
         <input type="text" id="dropSearch" name="dropSearch" placeholder="Search NASA">
         <button id="btn1">Search</button>
     </div>
+    <div id="warn"></div>
 
-    <div id="text"></div>
+    <div id="nasa_gallery"></div>
 <button id="back2top">Back to top</button>
 </body>
 </html>
