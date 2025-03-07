@@ -52,6 +52,7 @@ window.addEventListener('load', async function () {
                         links = item.links;
                         const descr = data.description;
                         const media_type = data.media_type;
+                        const date = data.date;
 
                         console.log(descr);
                         console.log(link);
@@ -70,17 +71,18 @@ window.addEventListener('load', async function () {
                         const div = document.createElement("div");
                         div.classList.add('preview_descr');
                         div.innerHTML = descr;
-
-
+                        
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("container");
-
-                        // const description = document.createElement("p");
-                        // description.textContent = descr;
 
                         const keywords = document.createElement('div');
                         keywords.classList.add('hide');
                         keywords.id = 'keyword';
+                        
+                        const dateElement = document.createElement("p");
+                        dateElement.textContent = date;
+                        dateElement.classList.add('hide');
+                        dateElement.setAttribute('id', 'date');
 
                         if (data.keywords && data.keywords.length > 0) {
                             const keywordsText = data.keywords.map(keyword => {
@@ -123,11 +125,14 @@ window.addEventListener('load', async function () {
                     if (isContainerClicked) return;
 
                     // div.appendChild(description);
+                        newDiv.appendChild(dateElement);
                         div.appendChild(keywords);
                         newDiv.appendChild(div);
                         main.appendChild(newDiv);
                     document.querySelector("#back2top").classList.add('hide');
 
+                    
+                    // adding the event listener for each container
                     newDiv.addEventListener('click', (e) => {
                         isContainerClicked = true;
 
@@ -136,7 +141,8 @@ window.addEventListener('load', async function () {
                         const keywordsDiv = newDiv.querySelector('#keyword');
                         const imageElement = newDiv.querySelector('img');
                         const videoElement = newDiv.querySelector('video');
-                        const description = newDiv.querySelector('.text-div').innerText;
+                        const description = newDiv.querySelector('.preview_descr').innerText;
+                        const date = newDiv.querySelector('#date').textContent;
 
                         backButton.classList.remove('hide');
                         searchBar.classList.add('hide');
@@ -157,6 +163,9 @@ window.addEventListener('load', async function () {
                         title.textContent = titleText;
 
                         main_div.appendChild(title);
+                        
+                        const dateElement = document.createElement("p");
+                        dateElement.textContent = date;
 
                         if (img) {
                             const imagElement = document.createElement('img');
@@ -198,6 +207,7 @@ window.addEventListener('load', async function () {
                         }
                         main_div.appendChild(descriptionDiv);
                         main_div.appendChild(keywordsElement);
+                        main_div.appendChild(dateElement);
                         main_container.appendChild(main_div);
 
                         const keywords = document.querySelectorAll('a');
@@ -216,12 +226,8 @@ window.addEventListener('load', async function () {
                 console.log(text);
             } catch (e) {
                 console.error(e);
-                const warn_div = document.querySelector('#warn');
-                const text = "There is some trouble connecting to the server"
-                const warning = document.createElement('p');
-                warning.id = "warning";
-                warning.textContent = text;
-                warn_div.appendChild(warning);
+                const warning = document.querySelector('#warning');
+                warning.textContent = "There is some trouble connecting to the server";
             }
     }
     // Handle search button click
