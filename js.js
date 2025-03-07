@@ -173,10 +173,9 @@ window.addEventListener('load', async function () {
                         const dateElement = document.createElement("p");
                         dateElement.textContent = "Date: ";
                         dateElement.setAttribute('id', 'date');
-                        main_div.appendChild(date_dv);
                         
-                        dateElement.appendChild(date_dv)
-                        date_text.appendChild(date_dv)
+                        date_dv.appendChild(dateElement);
+                        date_dv.appendChild(date_text);
 
                         if (img) {
                             const imagElement = document.createElement('img');
