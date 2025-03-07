@@ -1,11 +1,13 @@
 window.addEventListener('load', async function () {
     let isContainerClicked = false
-    const containers = document.querySelectorAll('.container');
     const main_container = document.querySelector('#nasa_gallery');
     const dropSearch = document.querySelector('#dropSearch');
     const searchButton = document.querySelector('#btn1');
     const searchBar = document.querySelector('#searchBar');
-    
+    const image_check = document.querySelector('#images')
+    const video_check = document.querySelector('#videos')
+
+
     function radom_search(search, button) {
         const randomsearch = ['nebula', 'moon', 'sun', 'orion', 'europa', 'asteroid belt', 'black hole']
         const randNum = Math.floor(Math.random() * randomsearch.length);
@@ -13,16 +15,30 @@ window.addEventListener('load', async function () {
         search_nasa()
     }
 
+    // handle check box operations
+    video_check.addEventListener('change', async function () {
+        if (!image_check.checked && !video_check.checked) {
+            image_check.checked = true
+        }
+        await search_nasa()
+    })
+    image_check.addEventListener('change', async function () {
+        if (!image_check.checked && !video_check.checked) {
+            video_check.checked = true
+        }
+        await search_nasa()
+    })
+
     radom_search(dropSearch, searchButton);
     
     async function search_nasa() {
             // list for media types selected
             let mediaformat = []
             // getting the media type, and checking if it is checked, and if so pushing it to the media format list
-            if (document.querySelector('#images').checked) {
+            if (image_check.checked) {
                 mediaformat.push('image')
             }
-            if (document.querySelector('#videos').checked) {
+            if (video_check.checked) {
                 mediaformat.push('video')
             }
             // setting the main content area to nothing, to reset the images / videos
@@ -97,6 +113,7 @@ window.addEventListener('load', async function () {
 
                         if (media_type === 'image') {
                             const newImg = document.createElement("img");
+                            newImg.classList.add('small_image');
                             newImg.src = link;
 
                             newDiv.appendChild(newImg);
@@ -112,6 +129,7 @@ window.addEventListener('load', async function () {
                             console.log(videoUrl); // Check the URL in the console
 
                             const newVideo = document.createElement("video");
+                            newVideo.classList.add('small_video');
                             newVideo.src = videoUrl;
                             newVideo.controls = true; // Add video controls (play, pause, volume)
 
@@ -129,13 +147,15 @@ window.addEventListener('load', async function () {
                         div.appendChild(keywords);
                         newDiv.appendChild(div);
                         main.appendChild(newDiv);
-                    document.querySelector("#back2top").classList.add('hide');
+                    // document.querySelector("#back2top").classList.add('hide');
 
                     
                     // adding the event listener for each container
                     newDiv.addEventListener('click', (e) => {
                         isContainerClicked = true;
 
+                        const back2top = document.querySelector('#back2top');
+                        back2top.classList.toggle('hide');
                         const backButton = document.querySelector('#backButton');
                         const titleText = newDiv.querySelector('h2').textContent;
                         const keywordsDiv = newDiv.querySelector('#keyword');
@@ -150,12 +170,15 @@ window.addEventListener('load', async function () {
                         main_container.removeAttribute.id = "nasa_gallery";
 
                         // Check for image or video and set variables accordingly
-                        let img = imageElement ? imageElement.getAttribute('src') : null;
-                        let video = videoElement ? videoElement.getAttribute('src') : null;
+                        let mediaSrc = null; // Variable to store the media source
+                        if (imageElement) {
+                            mediaSrc = imageElement.src; // Get the image source if the image exists
+                        } else if (videoElement) {
+                            mediaSrc = videoElement.src; // Get the video source if the video exists
+                        }
 
                         main_container.innerHTML = '';
 
-                        main_container.classList.remove('text');
                         const main_div = document.createElement('div');
                         main_div.setAttribute('id', 'bigImg');
 
@@ -163,31 +186,33 @@ window.addEventListener('load', async function () {
                         title.textContent = titleText;
 
                         main_div.appendChild(title);
-                        
+
                         const date_dv = document.createElement("div");
                         date_dv.setAttribute('id', 'dateDiv');
-                        
+
                         const date_text = document.createElement("p");
                         date_text.textContent = date;
-                        
+
                         const dateElement = document.createElement("p");
                         dateElement.textContent = "Date: ";
                         dateElement.setAttribute('id', 'date');
-                        
+
                         date_dv.appendChild(dateElement);
                         date_dv.appendChild(date_text);
 
-                        if (img) {
+                        if (imageElement) {
                             const imagElement = document.createElement('img');
-                            imagElement.src = img;
+                            // imagElement.classList.remove('small_image');
+                            imagElement.src = mediaSrc;
 
-                            main_div.appendChild(imageElement);
-                        } else if (video) {
-                            const videoElement = document.createElement('video');
-                            videoElement.src = video;
-                            videoElement.controls = true; // Add video controls (play, pause, volume)
+                            main_div.appendChild(imagElement);
+                        } else if (videoElement) {
+                            const vidElement = document.createElement('video');
+                            vidElement.src = mediaSrc;
+                            vidElement.controls = true; // Add video controls (play, pause, volume)
+                            console.log(vidElement); // Inspect the video element in the console
 
-                            main_div.appendChild(videoElement);
+                            main_div.appendChild(vidElement);
                         }
 
                         const descriptionDiv = document.createElement("div");
@@ -245,10 +270,10 @@ window.addEventListener('load', async function () {
     
     const backButton = document.querySelector('#backButton');
     backButton.addEventListener('click',  function () {
+        document.querySelector('#back2top').classList.remove('hide');
         backButton.classList.add('hide');
         main_container.innerHTML = '';
         searchBar.classList.remove('hide');
-        main_container.classList.add('text');
         dropSearch.classList.remove('hide');
         isContainerClicked = false;
         search_nasa()
