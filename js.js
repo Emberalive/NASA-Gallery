@@ -1,6 +1,6 @@
 window.addEventListener('load', async function () {
     let isContainerClicked = false
-    const container = document.querySelectorAll('.container');
+    const containers = document.querySelectorAll('.container');
     const main_container = document.querySelector('#nasa_gallery');
     const dropSearch = document.querySelector('#dropSearch');
     const searchButton = document.querySelector('#btn1');
@@ -68,14 +68,15 @@ window.addEventListener('load', async function () {
                         title_div.appendChild(Title);
 
                         const div = document.createElement("div");
-                        div.classList.add('text-div');
+                        div.classList.add('preview_descr');
+                        div.innerHTML = descr;
+
 
                         const newDiv = document.createElement("div");
                         newDiv.classList.add("container");
 
-                        const description = document.createElement("p");
-                        description.textContent = descr;
-                        // description.style.textAlign = "center";
+                        // const description = document.createElement("p");
+                        // description.textContent = descr;
 
                         const keywords = document.createElement('div');
                         keywords.classList.add('hide');
@@ -121,11 +122,94 @@ window.addEventListener('load', async function () {
                         }
                     if (isContainerClicked) return;
 
-                    div.appendChild(description);
+                    // div.appendChild(description);
                         div.appendChild(keywords);
                         newDiv.appendChild(div);
                         main.appendChild(newDiv);
-                    
+                    document.querySelector("#back2top").classList.add('hide');
+
+                    newDiv.addEventListener('click', (e) => {
+                        isContainerClicked = true;
+
+                        const backButton = document.querySelector('#backButton');
+                        const titleText = newDiv.querySelector('h2').textContent;
+                        const keywordsDiv = newDiv.querySelector('#keyword');
+                        const imageElement = newDiv.querySelector('img');
+                        const videoElement = newDiv.querySelector('video');
+                        const description = newDiv.querySelector('.text-div').innerText;
+
+                        backButton.classList.remove('hide');
+                        searchBar.classList.add('hide');
+                        main_container.classList.remove('nasa_gallery');
+                        main_container.removeAttribute.id = "nasa_gallery";
+
+                        // Check for image or video and set variables accordingly
+                        let img = imageElement ? imageElement.getAttribute('src') : null;
+                        let video = videoElement ? videoElement.getAttribute('src') : null;
+
+                        main_container.innerHTML = '';
+
+                        main_container.classList.remove('text');
+                        const main_div = document.createElement('div');
+                        main_div.setAttribute('id', 'bigImg');
+
+                        const title = document.createElement("h2")
+                        title.textContent = titleText;
+
+                        main_div.appendChild(title);
+
+                        if (img) {
+                            const imagElement = document.createElement('img');
+                            imagElement.src = img;
+
+                            main_div.appendChild(imageElement);
+                        } else if (video) {
+                            const videoElement = document.createElement('video');
+                            videoElement.src = video;
+                            videoElement.controls = true; // Add video controls (play, pause, volume)
+
+                            main_div.appendChild(videoElement);
+                        }
+
+                        const descriptionDiv = document.createElement("div");
+                        descriptionDiv.classList.add('text-div');
+                        descriptionDiv.textContent = description
+
+                        const keywordsElement = document.createElement('div');
+                        keywordsElement.setAttribute('id', 'keywords');
+
+                        const keywordsTitle = document.createElement('h3');
+                        keywordsTitle.textContent = "Keywords";
+
+                        keywordsElement.appendChild(keywordsTitle);
+
+                        if (keywordsDiv) {
+                            const anchors = keywordsDiv.querySelectorAll('a'); // Get all <a> tags inside keywordsDiv
+                            for (let i = 0; i < anchors.length; i++) {
+                                if (i === anchors.length - 1) {
+                                    keywordsElement.appendChild(anchors[i].cloneNode(true)); // Clone to avoid moving
+                                } else {
+                                    keywordsElement.appendChild(anchors[i].cloneNode(true)); // Clone to avoid moving
+                                    const comma = document.createElement('p');
+                                    comma.textContent = ", ";
+                                    keywordsElement.appendChild(comma);
+                                }
+                            }
+                        }
+                        main_div.appendChild(descriptionDiv);
+                        main_div.appendChild(keywordsElement);
+                        main_container.appendChild(main_div);
+
+                        const keywords = document.querySelectorAll('a');
+                        for (let i = 0; i < keywords.length; i++) {
+                            keywords[i].addEventListener('click', (e) => {
+                                isContainerClicked = false;
+                                backButton.classList.add('hide');
+                                dropSearch.value = e.target.textContent;
+                                search_nasa()
+                            })
+                        }
+                    })
 
                     document.querySelector("#load_bar").classList.add("hide");
                 }
@@ -142,100 +226,6 @@ window.addEventListener('load', async function () {
     }
     // Handle search button click
     searchButton.addEventListener('click', search_nasa);
-
-    
-    // loading the main card for one image or video
-    function make_card () {
-        isContainerClicked = true;
-
-        //checking the number of containers against the list of media items, to se if all the images/ videos have been loaded
-        // const num_containers = main_container.querySelectorAll('.container').length;
-        container.forEach(clickedContainer => {
-            clickedContainer.addEventListener('click', (e) => {
-                const backButton = document.querySelector('#backButton');
-                const titleText = clickedContainer.querySelector('h2').textContent;
-                const keywordsDiv = clickedContainer.querySelector('#keyword');
-                const imageElement = clickedContainer.querySelector('img');
-                const videoElement = clickedContainer.querySelector('video');
-                const description = clickedContainer.querySelector('p').innerText;
-
-                backButton.classList.remove('hide');
-                searchBar.classList.add('hide');
-                main_container.classList.remove('nasa_gallery');
-                main_container.removeAttribute.id = "nasa_gallery";
-
-                // Check for image or video and set variables accordingly
-                let img = imageElement ? imageElement.getAttribute('src') : null;
-                let video = videoElement ? videoElement.getAttribute('src') : null;
-
-                main_container.innerHTML = '';
-
-                main_container.classList.remove('text');
-                const main_div = document.createElement('div');
-                main_div.setAttribute('id', 'bigImg');
-
-                const title = document.createElement("h2")
-                title.textContent = titleText;
-
-                main_div.appendChild(title);
-
-                if (img) {
-                    const imagElement = document.createElement('img');
-                    imagElement.src = img;
-
-                    main_div.appendChild(imageElement);
-                } else if (video) {
-                    const videoElement = document.createElement('video');
-                    videoElement.src = video;
-                    videoElement.controls = true; // Add video controls (play, pause, volume)
-
-                    main_div.appendChild(videoElement);
-
-                }
-
-                const descriptionDiv = document.createElement("div");
-                const descriptionElement = document.createElement("p");
-                descriptionElement.textContent = description
-                descriptionElement.classList.add('text-div');
-
-                descriptionDiv.appendChild(descriptionElement);
-
-
-                const keyowrdsElement = document.createElement('div');
-
-                if (keywordsDiv) {
-                    const anchors = keywordsDiv.querySelectorAll('a'); // Get all <a> tags inside keywordsDiv
-                    anchors.forEach(anchor => {
-                        keyowrdsElement.appendChild(anchor.cloneNode(true)); // Clone to avoid moving
-                    });
-                }
-
-
-                main_div.appendChild(descriptionDiv);
-                main_div.appendChild(keyowrdsElement);
-                main_container.appendChild(main_div);
-
-                document.querySelector("#back2top").classList.add('hide');
-            })
-            })
-    }
-    
-    main_container.addEventListener('click',  function() {
-        make_card()
-    });
-    
-    const keywordLinks = document.querySelectorAll('.keyword');
-
-// Add event listener to each keyword link
-    keywordLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            isContainerClicked = false;
-            searchBar.classList.remove('hide');
-            backButton.classList.add('hide');
-            dropSearch.value = e.textContent;  // Set the input value to the clicked keyword's text
-            search_nasa()
-        });
-    })
     
     const backButton = document.querySelector('#backButton');
     backButton.addEventListener('click',  function () {

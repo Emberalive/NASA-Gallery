@@ -73,18 +73,30 @@ main {
 
 .text-div {
     margin: 0.5% auto;
-    border-top: 2px solid #9e9b9b;
-    padding-top: 2%;
+    border: 2px solid #9e9b9b;
+    padding: 2%;
     text-align: center;
     max-height: 330px;
     width: 80%;
+    overflow: auto; /* Enables scrolling if content overflows */
+    overflow-x: hidden;
 }
 
-.text-div p {
+.preview_descr {
+    border-top: 2px solid #9e9b9b;
+    padding-top: 2%;
+    margin-top: 2%;
+    width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+/*.text-div p {*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: nowrap;*/
+/*}*/
 
 #title {
     padding: 1%;
@@ -225,6 +237,14 @@ h1 {
 .keyword {
     color: cornflowerblue;
     font-weight: bold;
+}
+
+#keywords > a, #keywords > p {
+    display: inline;
+}
+
+#keywords {
+    margin: 2%;
 }
 
 .video {
