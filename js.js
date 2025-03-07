@@ -52,7 +52,7 @@ window.addEventListener('load', async function () {
                         links = item.links;
                         const descr = data.description;
                         const media_type = data.media_type;
-                        const date = data.date;
+                        const date = data.date_created;
 
                         console.log(descr);
                         console.log(link);
@@ -164,8 +164,19 @@ window.addEventListener('load', async function () {
 
                         main_div.appendChild(title);
                         
+                        const date_dv = document.createElement("div");
+                        date_dv.setAttribute('id', 'dateDiv');
+                        
+                        const date_text = document.createElement("p");
+                        date_text.textContent = date;
+                        
                         const dateElement = document.createElement("p");
-                        dateElement.textContent = date;
+                        dateElement.textContent = "Date: ";
+                        dateElement.setAttribute('id', 'date');
+                        main_div.appendChild(date_dv);
+                        
+                        dateElement.appendChild(date_dv)
+                        date_text.appendChild(date_dv)
 
                         if (img) {
                             const imagElement = document.createElement('img');
@@ -207,7 +218,7 @@ window.addEventListener('load', async function () {
                         }
                         main_div.appendChild(descriptionDiv);
                         main_div.appendChild(keywordsElement);
-                        main_div.appendChild(dateElement);
+                        main_div.appendChild(date_dv);
                         main_container.appendChild(main_div);
 
                         const keywords = document.querySelectorAll('a');

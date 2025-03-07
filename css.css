@@ -242,3 +242,11 @@ h1 {
     width: 100%;
     margin: 2%;
 }
+
+#date {
+    font-weight: bold;
+}
+
+#dateDiv > p {
+    display: inline;
+}
